@@ -1,0 +1,29 @@
+require:
+  - rubocop-performance
+
+AllCops:
+  TargetRubyVersion: 2.6.5
+
+  Exclude:
+    - bundle/**/*
+    - vendor/**/*
+
+  DisplayCopNames: true
+
+Metrics/LineLength:
+  Max: 120
+  Exclude:
+    - spec/**/*.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
+    - app/api/**/*.rb
+    - lib/tasks/**/*.rake
+    - config/**/*.rb
+
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
