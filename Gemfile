@@ -19,7 +19,9 @@ end
 group :development, :test do
   gem 'factory_bot'
   gem 'faker'
+  gem 'rack-test'
   gem 'rspec'
+  gem 'rspec-expectations'
   gem 'simplecov', require: false
 end
 

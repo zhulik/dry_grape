@@ -66,6 +66,8 @@ GEM
     rack (2.0.7)
     rack-accept (0.4.5)
       rack (>= 0.4)
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
     rainbow (3.0.0)
     rake (12.3.2)
     reverse_markdown (1.3.0)
@@ -137,8 +139,10 @@ DEPENDENCIES
   overcommit
   pry
   puma
+  rack-test
   rake
   rspec
+  rspec-expectations
   rspec-mocks
   rubocop
   rubocop-performance
