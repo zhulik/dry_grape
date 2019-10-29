@@ -7,12 +7,8 @@ class DryGrape < Grape::API
     end
   end
 
-  def self.env
-    @env ||= ENV['RACK_ENV']
-  end
-
   format :json
-  formatter :json, PrettyJSON unless env == 'production'
+  formatter :json, PrettyJSON unless Application.instance.env == 'production'
 
   rescue_from Exception do
     error!({ error: 'Server error' }, 500)
@@ -31,9 +27,5 @@ class DryGrape < Grape::API
   desc 'Not found endpoint'
   route :any, '*path' do
     error!({ error: 'Not found' }, 404)
-  end
-
-  def env
-    self.class.env
   end
 end
