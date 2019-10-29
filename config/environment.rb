@@ -7,8 +7,6 @@ require 'bundler'
 Bundler.require(:default, ENV['RACK_ENV'])
 
 class Application
-  include Singleton
-
   def initialize
     @loader = Zeitwerk::Loader.new
     @loader.push_dir('web')
@@ -21,22 +19,23 @@ class Application
 
   def setup
     @loader.setup
-    load_environment!
   end
 
   def eager_load!
     @loader.eager_load
   end
 
-  private
-
   def load_environment!
     require_relative(File.join('environments', env))
   end
 end
 
-Dotenv.load(".env.#{Application.instance.env}")
+app = Application.new
+app.setup
+Container.register(:app, app)
 
-Application.instance.setup
+Dotenv.load(".env.#{Container[:app].env}")
 
 Dir[File.join(File.expand_path('initializers', __dir__), '*.rb')].each { |file| require file }
+
+app.load_environment!
