@@ -3,12 +3,25 @@
 class DryGrape::App < Grape::API
   format :json
 
+  module PrettyJSON
+    def self.call(object, _env)
+      JSON.pretty_generate(JSON.parse(object.to_json)) + "\n"
+    end
+  end
+
+  formatter :json, PrettyJSON
+  error_formatter :custom, PrettyJSON
+
+  rescue_from Exception do
+    error!({ error: 'Server error' }, 500)
+  end
+
   get '/' do
     {}
   end
 
-  get '/ping' do
-    { ping: 'pong' }
+  get '/pulse' do
+    { pulse: :ok }
   end
 
   route :any, '*path' do
