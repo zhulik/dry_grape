@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'grape'
+gem 'pry'
 gem 'puma'
 gem 'zeitwerk'
 
@@ -17,7 +18,6 @@ end
 group :development, :test do
   gem 'factory_bot'
   gem 'faker'
-  gem 'pry'
   gem 'pry-rescue'
   gem 'rspec'
   gem 'simplecov', require: false
