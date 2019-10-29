@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DryGrape::App < Grape::API
+class DryGrape < Grape::API
   module PrettyJSON
     def self.call(object, _env)
       JSON.pretty_generate(JSON.parse(object.to_json)) + "\n"
