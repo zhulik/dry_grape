@@ -12,6 +12,7 @@ class Application
   def initialize
     @loader = Zeitwerk::Loader.new
     @loader.push_dir('web')
+    @loader.push_dir('lib')
   end
 
   def env
@@ -34,4 +35,8 @@ class Application
   end
 end
 
+Dotenv.load(".env.#{Application.instance.env}")
+
 Application.instance.setup
+
+Dir[File.join(File.expand_path('initializers', __dir__), '*.rb')].each { |file| require file }

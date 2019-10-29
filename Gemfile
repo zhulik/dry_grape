@@ -3,10 +3,18 @@
 source 'https://rubygems.org'
 
 gem 'grape'
+gem 'pg'
 gem 'pry'
 gem 'puma'
 gem 'rake'
+
+gem 'dotenv'
 gem 'zeitwerk'
+
+gem 'dry-container'
+
+gem 'rom'
+gem 'rom-sql'
 
 group :development do
   gem 'overcommit', require: false
