@@ -11,7 +11,7 @@ class Application
 
   def initialize
     @loader = Zeitwerk::Loader.new
-    @loader.push_dir('api')
+    @loader.push_dir('web')
   end
 
   def env
