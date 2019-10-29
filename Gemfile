@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'grape'
 gem 'pry'
 gem 'puma'
+gem 'rake'
 gem 'zeitwerk'
 
 group :development do
@@ -18,7 +19,6 @@ end
 group :development, :test do
   gem 'factory_bot'
   gem 'faker'
-  gem 'pry-rescue'
   gem 'rspec'
   gem 'simplecov', require: false
 end
