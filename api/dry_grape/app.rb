@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
 class DryGrape::App < Grape::API
-  format :json
-
   module PrettyJSON
     def self.call(object, _env)
       JSON.pretty_generate(JSON.parse(object.to_json)) + "\n"
     end
   end
 
-  formatter :json, PrettyJSON
-  error_formatter :custom, PrettyJSON
+  def self.env
+    @env ||= ENV['RACK_ENV']
+  end
+
+  format :json
+  formatter :json, PrettyJSON unless env == 'production'
 
   rescue_from Exception do
     error!({ error: 'Server error' }, 500)
@@ -26,5 +28,9 @@ class DryGrape::App < Grape::API
 
   route :any, '*path' do
     error!({ error: 'Not found' }, 404)
+  end
+
+  def env
+    self.class.env
   end
 end
