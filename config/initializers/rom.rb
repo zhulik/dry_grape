@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 rom = ROM.container(:sql, 'postgres://postgres@localhost/dry_grape-development') do |config|
-  # define relations and commands here...
+  config.register_relation(Persistence::Users)
 end
 
 Container.register(:rom, rom)

@@ -7,6 +7,11 @@ ROM::SQL.migration do
       primary_key [:id]
       column :username, String, null: false
       column :password_hash, String, null: false
+
+      column :created_at, :timestamp, null: false, default: Sequel.lit("(now() at time zone 'utc')")
+      column :updated_at, :timestamp, null: false, default: Sequel.lit("(now() at time zone 'utc')")
+
+      index :username, unique: true
     end
   end
 end
