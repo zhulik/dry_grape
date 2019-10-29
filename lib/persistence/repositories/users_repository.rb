@@ -8,7 +8,7 @@ class Persistence::Repositories::UsersRepository < ROM::Repository[:users]
   end
 
   def by_username(username)
-    users.where(username: username).one!
+    users.where(username: username).one
   end
 end
 

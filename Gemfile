@@ -12,6 +12,10 @@ gem 'dotenv'
 gem 'zeitwerk'
 
 gem 'dry-container'
+gem 'dry-transaction'
+gem 'dry-validation'
+
+gem 'bcrypt'
 
 gem 'rom'
 gem 'rom-sql'
