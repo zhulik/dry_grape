@@ -9,9 +9,9 @@ gem 'puma'
 gem 'rake'
 
 gem 'dotenv'
-gem 'zeitwerk'
 
 gem 'dry-container'
+gem 'dry-system'
 gem 'dry-transaction'
 gem 'dry-validation'
 
@@ -30,7 +30,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'factory_bot'
   gem 'faker'
   gem 'rack-test'
   gem 'rspec'

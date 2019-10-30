@@ -11,13 +11,13 @@ def location(route)
   [path, line].join(':')
 end
 
-task :environment do
-  require File.expand_path('config/environment', __dir__)
+task :application do
+  require File.expand_path('system/application', __dir__)
 end
 
 namespace :grape do
   desc 'Condensed API Routes'
-  task routes: :environment do
+  task routes: :application do
     fmt = '%- 10s %- 40s %- 50s %- 50s'
     Api::Root.routes.each do |route|
       puts format(fmt, route.request_method, route.path, location(route), route.description)
@@ -26,12 +26,12 @@ namespace :grape do
 end
 
 namespace :db do
-  task setup: :environment do
+  task setup: :application do
   end
 
   namespace :structure do
     desc 'Dump database structure to db/structure.sql'
-    task dump: :environment do
+    task dump: :application do
       if system('which pg_dump', out: File::NULL)
         system(%(pg_dump -s -x -O #{Shellwords.escape(ENV['DATABASE_URL'])} > db/structure.sql))
       end
