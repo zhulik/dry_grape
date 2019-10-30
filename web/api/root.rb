@@ -8,7 +8,7 @@ class Api::Root < Grape::API
   end
 
   format :json
-  formatter :json, PrettyJSON unless Container[:app].env == 'production'
+  formatter :json, PrettyJSON unless System[:app].env == 'production'
 
   rescue_from Exception do
     error!({ error: 'Server error' }, 500)

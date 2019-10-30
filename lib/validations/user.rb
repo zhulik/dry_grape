@@ -19,4 +19,4 @@ class Validations::User < Dry::Validation::Contract
   end
 end
 
-Container.register('user.validate', Validations::User.new)
+System.register('user.validate', Validations::User.new)

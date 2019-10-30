@@ -4,4 +4,4 @@ rom = ROM.container(:sql, 'postgres://postgres@localhost/dry_grape-development')
   config.register_relation(Persistence::Relations::Users)
 end
 
-Container.register(:rom, rom)
+System.register(:rom, rom)

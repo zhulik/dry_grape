@@ -24,6 +24,6 @@ class Transactions::Users::Create
   end
 
   def create(input)
-    Success(Container[:users_repo].create(input))
+    Success(System[:users_repo].create(input))
   end
 end

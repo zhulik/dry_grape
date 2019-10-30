@@ -32,9 +32,9 @@ end
 
 app = Application.new
 app.setup
-Container.register(:app, app)
+System.register(:app, app)
 
-Dotenv.load(".env.#{Container[:app].env}")
+Dotenv.load(".env.#{System[:app].env}")
 
 Dir[File.join(File.expand_path('initializers', __dir__), '*.rb')].each { |file| require file }
 

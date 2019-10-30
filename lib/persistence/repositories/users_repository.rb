@@ -12,4 +12,4 @@ class Persistence::Repositories::UsersRepository < ROM::Repository[:users]
   end
 end
 
-Container.register(:users_repo, Persistence::Repositories::UsersRepository.new(Container[:rom]))
+System.register(:users_repo, Persistence::Repositories::UsersRepository.new(System[:rom]))
