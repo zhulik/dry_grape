@@ -14,8 +14,8 @@ module Transactions
       private
 
       def validate(input)
-        # result = user.call(input)
-        # return Failure(result.errors) if result.errors.any?
+        result = user.call(input)
+        return Failure(result.errors) if result.errors.any?
 
         Success(input)
       end
