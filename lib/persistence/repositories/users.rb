@@ -2,7 +2,7 @@
 
 module Persistence
   module Repositories
-    class Users < ROM::Repository[:users]
+    class Users < Persistence::Repository[:users]
       commands :create, update: :by_pk, delete: :by_pk
 
       def all
