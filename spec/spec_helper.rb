@@ -20,6 +20,10 @@ module RequestHelpers
   end
 end
 
+DatabaseCleaner[:sequel, connection: Application['persistence.config'][:default].connection].strategy = :truncation
+
+Dir[File.join(__dir__, 'support/**/*.rb')].each(&method(:require))
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -35,5 +39,15 @@ RSpec.configure do |config|
 
   config.define_derived_metadata(file_path: Regexp.new('/spec/web/')) do |metadata|
     metadata[:type] = :request
+  end
+
+  config.before :suite do
+    DatabaseCleaner.clean_with :truncation
+  end
+
+  config.around do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
   end
 end

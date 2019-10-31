@@ -30,7 +30,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'faker'
   gem 'rack-test'
   gem 'rspec'
   gem 'rspec-expectations'
@@ -39,5 +38,6 @@ end
 
 group :test do
   gem 'database_cleaner'
+  gem 'rom-factory'
   gem 'rspec-mocks'
 end
