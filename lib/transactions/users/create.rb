@@ -1,29 +1,35 @@
 # frozen_string_literal: true
 
-class Transactions::Users::Create
-  include Dry::Transaction
+module Transactions
+  module Users
+    class Create
+      include Dry::Transaction
+      include Import['validations.user']
+      include Import['persistence.repositories.users']
 
-  step :validate
-  step :hash_password
-  step :create
+      step :validate
+      step :hash_password
+      step :create
 
-  private
+      private
 
-  def validate(input)
-    result = Container['user.validate'].call(input)
-    return Failure(result.errors) if result.errors.any?
+      def validate(input)
+        result = user.call(input)
+        return Failure(result.errors) if result.errors.any?
 
-    Success(result.values.data)
-  end
+        Success(input)
+      end
 
-  def hash_password(input)
-    Success(
-      input.merge(password_hash: BCrypt::Password.create(input[:password]))
-           .except(:password)
-    )
-  end
+      def hash_password(input)
+        Success(
+          input.merge(password_hash: BCrypt::Password.create(input[:password]))
+               .except(:password)
+        )
+      end
 
-  def create(input)
-    Success(Container[:users_repo].create(input))
+      def create(input)
+        Success(users.create(input))
+      end
+    end
   end
 end

@@ -4,7 +4,7 @@ ENV['RACK_ENV'] ||= 'test'
 require 'simplecov'
 SimpleCov.start
 
-require File.expand_path('../config/environment', __dir__)
+require File.expand_path('../system/application', __dir__)
 
 module RequestHelpers
   def self.included(base)
