@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Application.boot(:persistence, namespace: true) do |_system|
+Application.boot(:persistence, namespace: true) do |system|
   init do
     Sequel.database_timezone = :utc
     Sequel.application_timezone = :local
@@ -16,7 +16,7 @@ Application.boot(:persistence, namespace: true) do |_system|
 
   start do
     config = container['persistence.config']
-
+    config.auto_registration system.root.join('lib/persistence')
     register 'rom', ROM.container(config)
   end
 end
