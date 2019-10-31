@@ -11,8 +11,8 @@ gem 'rake'
 gem 'dotenv'
 
 gem 'dry-container'
+gem 'dry-monads'
 gem 'dry-system'
-gem 'dry-transaction'
 gem 'dry-validation'
 
 gem 'bcrypt'

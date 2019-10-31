@@ -3,13 +3,19 @@
 module Transactions
   module Users
     class Create
-      include Dry::Transaction
+      include Dry::Monads[:result]
+      include Dry::Monads::Do.for(:call)
+
       include Import['validations.user']
       include Import['persistence.repositories.users']
 
-      step :validate
-      step :hash_password
-      step :create
+      def call(params)
+        values = yield validate(params)
+        values = yield hash_password(values)
+        user = yield create(values)
+
+        Success(user)
+      end
 
       private
 

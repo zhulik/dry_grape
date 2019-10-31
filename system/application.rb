@@ -4,6 +4,8 @@ ENV['RACK_ENV'] ||= 'development'
 
 require 'bundler'
 require 'dry/system/container'
+require 'dry/monads'
+require 'dry/monads/do'
 
 Bundler.require(:default, ENV['RACK_ENV'])
 
