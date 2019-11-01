@@ -6,12 +6,12 @@ module Transactions
       include Dry::Monads[:result]
       include Dry::Monads::Do.for(:call)
 
-      include Import['validations.user']
-      include Import['persistence.repositories.users']
+      include Import[validator: 'validations.users.create']
+      include Import[repo: 'persistence.repositories.users']
 
       def call(params)
         values = yield validate(params)
-        values = yield hash_password(values)
+        values = yield hash_password(values.to_h)
         user = yield create(values)
 
         Success(user)
@@ -20,10 +20,7 @@ module Transactions
       private
 
       def validate(input)
-        result = user.call(input)
-        return Failure(result.errors) if result.errors.any?
-
-        Success(input)
+        validator.call(input).to_monad
       end
 
       def hash_password(input)
@@ -34,7 +31,7 @@ module Transactions
       end
 
       def create(input)
-        Success(users.create(input))
+        Success(repo.create(input))
       end
     end
   end

@@ -28,3 +28,5 @@ Import = Application.injector
 Application.start(:persistence)
 
 Application.finalize!
+
+Dry::Validation.load_extensions(:monads)
